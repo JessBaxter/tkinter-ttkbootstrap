@@ -21,7 +21,7 @@ def datey():
 # Create Function to show the calendar
 def calendar():
     # ? REF: https://ttkbootstrap.readthedocs.io/en/latest/api/dialogs/querybox/
-    cal = Querybox()  # Querybox requires ttkbootstrap.dialogs library
+    cal = Querybox()  # Querybox requires ttkbootstrap.dialogs module
     my_label.config(text=f"You picked: {cal.get_date()}")
 
 
