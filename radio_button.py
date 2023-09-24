@@ -29,6 +29,7 @@ for topping in toppings:
         variable=my_topping,  # Set the variable
         text=topping,  # The radio button text
         value=topping,  # my_topping variable will become Pepperoni
+        # command=clicker,  # OPTIONAL: negates having the "click me" button
     ).pack(pady=20)
 
 # Create Button
