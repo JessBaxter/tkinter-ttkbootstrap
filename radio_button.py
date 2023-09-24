@@ -11,7 +11,7 @@ root.geometry("500x550")
 
 # Create clicker function
 def clicker():
-    my_label.config(text=f"You Selected: {my_topping.get()}")
+    my_label.config(text=f"You selected: {my_topping.get()}")
 
 
 # Create Radiobutton list
@@ -29,7 +29,7 @@ for topping in toppings:
         variable=my_topping,  # Set the variable
         text=topping,  # The radio button text
         value=topping,  # my_topping variable will become Pepperoni
-        # command=clicker,  # OPTIONAL: negates having the "click me" button
+        command=clicker,  # OPTIONAL: negates having the "click me" button
     ).pack(pady=20)
 
 # Create Button
@@ -39,5 +39,38 @@ my_button.pack(pady=20)
 # Create a Label
 my_label = tb.Label(root, text="You selected: ")
 my_label.pack(pady=20)
+
+# =============================
+
+# Create buttons that behave as radio buttons
+# * These are still part of the other radio button list
+# * Because we're using the my_topping variable
+rb1 = tb.Radiobutton(
+    root,
+    bootstyle="info toolbutton",
+    variable=my_topping,  # ! MAKE SURE THIS IS NOT IN "..."
+    text="Radio Button 1",
+    value="Radio Button 1",
+    command=clicker,
+)
+rb1.pack(pady=20)
+rb2 = tb.Radiobutton(
+    root,
+    bootstyle="info toolbutton",
+    variable=my_topping,  # ! MAKE SURE THIS IS NOT IN "..."
+    text="Radio Button 2",
+    value="Radio Button 2",
+    command=clicker,
+)
+rb2.pack(pady=20)
+rb3 = tb.Radiobutton(
+    root,
+    bootstyle="info toolbutton outline",
+    variable=my_topping,  # ! MAKE SURE THIS IS NOT IN "..."
+    text="Radio Button 3",
+    value="Radio Button 3",
+    command=clicker,
+)
+rb3.pack(pady=20)
 
 root.mainloop()
