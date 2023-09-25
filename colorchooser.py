@@ -14,7 +14,7 @@ root.geometry("700x350")
 
 # Create chooser function
 def chooser():
-    # ! REQUIRES from ttkbootstrap.dialogs.colorchooser import ColorChooserDialog
+    # ! REQUIRES: from ttkbootstrap.dialogs.colorchooser import ColorChooserDialog
     # Create color chooser
     my_color = ColorChooserDialog()
     # Show color chooser
