@@ -7,7 +7,7 @@
 
 from tkinter import *  # https://tcl.tk/man/tcl8.6/TkCmd/contents.htm
 import ttkbootstrap as tb  # https://ttkbootstrap.readthedocs.io/en/latest/
-from ttkbootstrap.dialogs import Messagebox  # Required for Messagebox
+from ttkbootstrap.dialogs import Messagebox  # ! Required for Messagebox
 
 # from datetime import date  # Allows you to set startdate in tb.DateEntry()
 # from ttkbootstrap.dialogs import Querybox  # Allows Button to bring up calendar
@@ -20,16 +20,34 @@ root = tb.Window(themename="superhero")
 root.title("TTK Bootstrap: Message Box")
 # Main app icon
 # root.iconbitmap('images/codemy.ico')
-# Messagebox Icon
+# ! Messagebox Icon -> need BOTH this and Main app icon
 # root.iconbitmap(default='images/codemy.ico')
 root.geometry("700x350")
 
 
 # Create clicker function
-def clicker():
+def yesno():
     # Create a dialog
     # yesno
-    Messagebox.yesno("Some message here", "This is the title")
+    # ! NEED IMPORT: from ttkbootstrap.dialogs import Messagebox
+    messagebox = Messagebox.yesno("Does pineapple belong on pizza?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "No":  # When using Messagebox.yesno
+        my_label.config(text=f"You clicked: {messagebox} ❌")
+    else:
+        my_label.config(text=f"You clicked: {messagebox} ✔")
+
+
+def ok():
+    # ok
+    messagebox = Messagebox.ok("What do you think?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "None":  # When using Messagebox.yesno
+        my_label.config(text=f"You didn't click OK (value = {messagebox})")
+    else:
+        my_label.config(text=f"You clicked OK (value = {messagebox})")
 
 
 # Colours: primary, secondary, success, info, warning, danger, light, dark
@@ -43,7 +61,10 @@ my_label.pack(pady=20)
 
 
 # Create Button
-my_button = tb.Button(root, text="Click me", bootstyle="info", command=clicker)
-my_button.pack(pady=40)
+my_button = tb.Button(root, text="yes/no", bootstyle="info", command=yesno)
+my_button.pack(side="left", pady=40, padx=10)
+
+my_button = tb.Button(root, text="ok", bootstyle="info", command=ok)
+my_button.pack(side="left", pady=40, padx=10)
 
 root.mainloop()
