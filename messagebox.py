@@ -8,6 +8,7 @@
 from tkinter import *  # https://tcl.tk/man/tcl8.6/TkCmd/contents.htm
 import ttkbootstrap as tb  # https://ttkbootstrap.readthedocs.io/en/latest/
 from ttkbootstrap.dialogs import Messagebox  # ! Required for Messagebox
+from constants import LARGER_BUTTON_WIDTH, BUTTON_WIDTH
 
 # from datetime import date  # Allows you to set startdate in tb.DateEntry()
 # from ttkbootstrap.dialogs import Querybox  # Allows Button to bring up calendar
@@ -82,6 +83,21 @@ def okcancel():
         my_label.config(text=f"You clicked CANCEL (value = {messagebox})")
     elif messagebox == "OK":
         my_label.config(text=f"You clicked OK (value = {messagebox})")
+    else:
+        my_label.config(text=f"You closed the window (value = {messagebox})")
+
+
+# Create retrycancel function
+# * Shows RETRY and CANCEL buttons
+def retrycancel():
+    # ok
+    messagebox = Messagebox.retrycancel("Redo or gtfo?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "Cancel":  # When using Messagebox.retrycancel
+        my_label.config(text=f"You clicked CANCEL (value = {messagebox})")
+    elif messagebox == "Retry":
+        my_label.config(text=f"You clicked RETRY (value = {messagebox})")
     else:
         my_label.config(text=f"You closed the window (value = {messagebox})")
 
@@ -168,63 +184,91 @@ my_label.grid(
 # Create Buttons
 # COLUMN 1 ===========================
 # * PLEASE 👉 sticky="e"
-my_button = tb.Button(my_frame, text="ok", bootstyle="success", command=ok, width=15)
-my_button.grid(column=0, row=1, padx=10, pady=10, sticky="e")
-
-
-my_button1 = tb.Button(
-    my_frame, text="show info", bootstyle="info", command=show_info, width=15
+ok_button = tb.Button(
+    my_frame, text="ok", bootstyle="success", command=ok, width=BUTTON_WIDTH
 )
-my_button1.grid(column=0, row=3, padx=10, pady=10, sticky="e")
+ok_button.grid(column=0, row=1, padx=10, pady=10, sticky="e")
 
 
-my_button3 = tb.Button(
-    my_frame, text="ok/cancel", bootstyle="success outline", command=okcancel, width=15
+okcancel_button = tb.Button(
+    my_frame,
+    text="ok/cancel",
+    bootstyle="success outline",
+    command=okcancel,
+    width=BUTTON_WIDTH,
 )
-my_button3.grid(column=0, row=2, padx=10, pady=10, sticky="e")
+okcancel_button.grid(column=0, row=2, padx=10, pady=10, sticky="e")
+
+
+retrycancel_button = tb.Button(
+    my_frame,
+    text="retry/cancel",
+    bootstyle="info outline",
+    command=retrycancel,
+    width=BUTTON_WIDTH,
+)
+retrycancel_button.grid(column=0, row=3, padx=10, pady=10, sticky="e")
 
 # COLUMN 2 ===========================
-my_button2 = tb.Button(
-    my_frame, text="yes/no", bootstyle="light outline", command=yesno, width=15
+yesno_button = tb.Button(
+    my_frame,
+    text="yes/no",
+    bootstyle="light outline",
+    command=yesno,
+    width=BUTTON_WIDTH,
 )
-my_button2.grid(column=1, row=1, padx=10, pady=10)
+yesno_button.grid(column=1, row=1, padx=10, pady=10)
 
-my_button2 = tb.Button(
+yesnocancel_button = tb.Button(
     my_frame,
     text="yes/no/cancel",
     bootstyle="light outline",
     command=yesnocancel,
-    width=15,
+    width=BUTTON_WIDTH,
 )
-my_button2.grid(column=1, row=2, padx=10, pady=10)
+yesnocancel_button.grid(column=1, row=2, padx=10, pady=10)
 
 
 # COLUMN 3 ===========================
 # * PLEASE 👉 sticky="w"
-my_button4 = tb.Button(
-    my_frame, text="show error    🔊", bootstyle="danger", command=show_error, width=20
+show_error_button = tb.Button(
+    my_frame,
+    text="show error    🔊",
+    bootstyle="danger",
+    command=show_error,
+    width=LARGER_BUTTON_WIDTH,
 )
-my_button4.grid(column=2, row=1, padx=10, pady=10, sticky="w")
+show_error_button.grid(column=2, row=1, padx=10, pady=10, sticky="w")
 
 
-my_button5 = tb.Button(
+show_question_button = tb.Button(
     my_frame,
     text="show question    🔊",
     bootstyle="light outline",
     command=show_question,
-    width=20,
+    width=LARGER_BUTTON_WIDTH,
 )
-my_button5.grid(column=2, row=2, padx=10, pady=10, sticky="w")
+show_question_button.grid(column=2, row=2, padx=10, pady=10, sticky="w")
 
 
-my_button6 = tb.Button(
+show_warning_button = tb.Button(
     my_frame,
     text="show warning    🔊",
     bootstyle="warning",
     command=show_warning,
-    width=20,
+    width=LARGER_BUTTON_WIDTH,
 )
-my_button6.grid(column=2, row=3, padx=10, pady=10, sticky="w")
+show_warning_button.grid(column=2, row=3, padx=10, pady=10, sticky="w")
+
+
+show_info_button = tb.Button(
+    my_frame,
+    text="show info",
+    bootstyle="info",
+    command=show_info,
+    width=LARGER_BUTTON_WIDTH,
+)
+show_info_button.grid(column=2, row=4, padx=10, pady=10, sticky="w")
 
 
 root.mainloop()
