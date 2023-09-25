@@ -35,8 +35,8 @@ my_spin = tb.Spinbox(
     root,
     bootstyle="success",
     font=("Helvetica", 18),
-    from_=0,  # Using from_ because from is Python keyword
-    to=10,
+    # from_=0,  # Using from_ because from is Python keyword
+    # to=10,
     values=stuff,  # Use stuff array instead of # 1-10
     state="readonly",  # Removes text highlight and disables editing
     # command=spinny, # Auto change Label when cycling through Spinbox items
