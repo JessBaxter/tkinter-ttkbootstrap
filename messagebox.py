@@ -36,8 +36,10 @@ def yesno():
     # Set Label to show which button was clicked
     if messagebox == "No":  # When using Messagebox.yesno
         my_label.config(text=f"You clicked: {messagebox} ❌")
-    else:
+    elif messagebox == "Yes":
         my_label.config(text=f"You clicked: {messagebox} ✔")
+    else:
+        my_label.config(text=f"You closed the window {messagebox}")
 
 
 # Create ok function
@@ -47,11 +49,7 @@ def ok():
     messagebox = Messagebox.ok("What do you think?", "Voting time!")
 
     # Set Label to show which button was clicked
-    if messagebox == "None":  # When using Messagebox.ok
-        my_label.config(text=f"You didn't click OK (value = {messagebox})")
-    else:
-        # ? messagebox = None, but the else triggers???
-        my_label.config(text=f"You clicked OK (value = {messagebox})")
+    my_label.config(text=f"You clicked: {messagebox}")
 
 
 # Create okcancel function
@@ -63,36 +61,45 @@ def okcancel():
     # Set Label to show which button was clicked
     if messagebox == "Cancel":  # When using Messagebox.okcancel
         my_label.config(text=f"You clicked CANCEL (value = {messagebox})")
-    else:
+    elif messagebox == "OK":
         my_label.config(text=f"You clicked OK (value = {messagebox})")
+    else:
+        my_label.config(text=f"You closed the window (value = {messagebox})")
 
 
 # Create show_info function
-# * Shows OK button
+# * Only shows OK button
 def show_info():
     # ok
     messagebox = Messagebox.show_info("Please read.", "Voting time!")
 
     # Set Label to show which button was clicked
-    if messagebox == "None":  # When using Messagebox.show_info
-        my_label.config(text=f"You didn't click OK (value = {messagebox})")
-    else:
-        # ? messagebox = None, but the else triggers???
-        my_label.config(text=f"You clicked OK (value = {messagebox})")
+    my_label.config(text=f"messagebox = {messagebox}")
 
 
 # Create show_error function
-# * Shows OK button
+# * Shows OK button, plays error/alert sound
 def show_error():
     # ok
     messagebox = Messagebox.show_error("Oops ...", "Voting time!")
 
     # Set Label to show which button was clicked
-    if messagebox == "None":  # When using Messagebox.show_error
-        my_label.config(text=f"You didn't click OK (value = {messagebox})")
+    my_label.config(text=f"messagebox = {messagebox}")
+
+
+# Create show_question function
+# * Shows YES and NO buttons, plays alert sound
+def show_question():
+    # ok
+    messagebox = Messagebox.show_question("What say ye?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "No":  # When using Messagebox.show_question
+        my_label.config(text=f"You clicked: {messagebox} ❌")
+    elif messagebox == "Yes":
+        my_label.config(text=f"You clicked: {messagebox} ✔")
     else:
-        # ? messagebox = None, but the else triggers???
-        my_label.config(text=f"You clicked OK (value = {messagebox})")
+        my_label.config(text=f"You closed the window {messagebox}")
 
 
 # Colours: primary, secondary, success, info, warning, danger, light, dark
@@ -107,20 +114,27 @@ my_label.pack(pady=20)
 
 # Create Button
 my_button = tb.Button(root, text="yes/no", bootstyle="warning outline", command=yesno)
-my_button.pack(side="left", pady=40, padx=10)
+my_button.pack(side="left", padx=10)
 
 my_button = tb.Button(root, text="ok", bootstyle="success", command=ok)
-my_button.pack(side="left", pady=40, padx=10)
+my_button.pack(side="left", padx=10)
 
 my_button = tb.Button(
     root, text="ok/cancel", bootstyle="info outline", command=okcancel
 )
-my_button.pack(side="left", pady=40, padx=10)
+my_button.pack(side="left", padx=10)
 
 my_button = tb.Button(root, text="show info", bootstyle="info", command=show_info)
-my_button.pack(side="left", pady=40, padx=10)
+my_button.pack(side="left", padx=10)
 
-my_button = tb.Button(root, text="show error", bootstyle="danger", command=show_error)
-my_button.pack(side="left", pady=40, padx=10)
+my_button = tb.Button(
+    root, text="show error    🔊", bootstyle="danger", command=show_error
+)
+my_button.pack(side="left", padx=10)
+
+my_button = tb.Button(
+    root, text="show question    🔊", bootstyle="warning outline", command=show_question
+)
+my_button.pack(side="left", padx=10)
 
 root.mainloop()
