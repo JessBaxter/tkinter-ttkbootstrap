@@ -25,7 +25,8 @@ root.title("TTK Bootstrap: Message Box")
 root.geometry("700x350")
 
 
-# Create clicker function
+# Create yesno function
+# * Shows YES and NO buttons
 def yesno():
     # Create a dialog
     # yesno
@@ -39,6 +40,8 @@ def yesno():
         my_label.config(text=f"You clicked: {messagebox} ✔")
 
 
+# Create ok function
+# * Only shows OK button
 def ok():
     # ok
     messagebox = Messagebox.ok("What do you think?", "Voting time!")
@@ -46,6 +49,19 @@ def ok():
     # Set Label to show which button was clicked
     if messagebox == "None":  # When using Messagebox.yesno
         my_label.config(text=f"You didn't click OK (value = {messagebox})")
+    else:
+        my_label.config(text=f"You clicked OK (value = {messagebox})")
+
+
+# Create okcancel function
+# * Shows OK and CANCEL buttons
+def okcancel():
+    # ok
+    messagebox = Messagebox.okcancel("Proceed or gtfo?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "Cancel":  # When using Messagebox.yesno
+        my_label.config(text=f"You clicked CANCEL (value = {messagebox})")
     else:
         my_label.config(text=f"You clicked OK (value = {messagebox})")
 
@@ -65,6 +81,9 @@ my_button = tb.Button(root, text="yes/no", bootstyle="info", command=yesno)
 my_button.pack(side="left", pady=40, padx=10)
 
 my_button = tb.Button(root, text="ok", bootstyle="info", command=ok)
+my_button.pack(side="left", pady=40, padx=10)
+
+my_button = tb.Button(root, text="ok/cancel", bootstyle="info", command=okcancel)
 my_button.pack(side="left", pady=40, padx=10)
 
 root.mainloop()
