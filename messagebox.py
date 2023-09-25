@@ -39,7 +39,26 @@ def yesno():
     elif messagebox == "Yes":
         my_label.config(text=f"You clicked: {messagebox} ✔")
     else:
-        my_label.config(text=f"You closed the window {messagebox}")
+        my_label.config(text=f"You closed the window (messagebox = {messagebox})")
+
+
+# Create yesnocancel function
+# * Shows YES and NO buttons
+def yesnocancel():
+    # Create a dialog
+    # yesnocancel
+    # ! NEED IMPORT: from ttkbootstrap.dialogs import Messagebox
+    messagebox = Messagebox.yesnocancel("Yay, nay or gtfo?", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "No":  # When using Messagebox.yesnocancel
+        my_label.config(text=f"You clicked: {messagebox} ❌")
+    elif messagebox == "Yes":
+        my_label.config(text=f"You clicked: {messagebox} ✔")
+    elif messagebox == "Cancel":
+        my_label.config(text=f"You clicked: {messagebox}")
+    else:
+        my_label.config(text=f"You closed the window (messagebox = {messagebox})")
 
 
 # Create ok function
@@ -148,6 +167,7 @@ my_label.grid(
 
 # Create Buttons
 # COLUMN 1 ===========================
+# * PLEASE 👉 sticky="e"
 my_button = tb.Button(my_frame, text="ok", bootstyle="success", command=ok, width=15)
 my_button.grid(column=0, row=1, padx=10, pady=10, sticky="e")
 
@@ -155,23 +175,32 @@ my_button.grid(column=0, row=1, padx=10, pady=10, sticky="e")
 my_button1 = tb.Button(
     my_frame, text="show info", bootstyle="info", command=show_info, width=15
 )
-my_button1.grid(column=0, row=2, padx=10, pady=10, sticky="e")
-
-
-# COLUMN 2 ===========================
-my_button2 = tb.Button(
-    my_frame, text="yes/no", bootstyle="warning outline", command=yesno, width=15
-)
-my_button2.grid(column=1, row=1, padx=10, pady=10)
+my_button1.grid(column=0, row=3, padx=10, pady=10, sticky="e")
 
 
 my_button3 = tb.Button(
-    my_frame, text="ok/cancel", bootstyle="info outline", command=okcancel, width=15
+    my_frame, text="ok/cancel", bootstyle="success outline", command=okcancel, width=15
 )
-my_button3.grid(column=1, row=2, padx=10, pady=10)
+my_button3.grid(column=0, row=2, padx=10, pady=10, sticky="e")
+
+# COLUMN 2 ===========================
+my_button2 = tb.Button(
+    my_frame, text="yes/no", bootstyle="light outline", command=yesno, width=15
+)
+my_button2.grid(column=1, row=1, padx=10, pady=10)
+
+my_button2 = tb.Button(
+    my_frame,
+    text="yes/no/cancel",
+    bootstyle="light outline",
+    command=yesnocancel,
+    width=15,
+)
+my_button2.grid(column=1, row=2, padx=10, pady=10)
 
 
 # COLUMN 3 ===========================
+# * PLEASE 👉 sticky="w"
 my_button4 = tb.Button(
     my_frame, text="show error    🔊", bootstyle="danger", command=show_error, width=20
 )
@@ -181,7 +210,7 @@ my_button4.grid(column=2, row=1, padx=10, pady=10, sticky="w")
 my_button5 = tb.Button(
     my_frame,
     text="show question    🔊",
-    bootstyle="warning outline",
+    bootstyle="light outline",
     command=show_question,
     width=20,
 )
