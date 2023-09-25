@@ -81,6 +81,20 @@ def show_info():
         my_label.config(text=f"You clicked OK (value = {messagebox})")
 
 
+# Create show_error function
+# * Shows OK button
+def show_error():
+    # ok
+    messagebox = Messagebox.show_error("Oops ...", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "None":  # When using Messagebox.show_error
+        my_label.config(text=f"You didn't click OK (value = {messagebox})")
+    else:
+        # ? messagebox = None, but the else triggers???
+        my_label.config(text=f"You clicked OK (value = {messagebox})")
+
+
 # Colours: primary, secondary, success, info, warning, danger, light, dark
 # STYLE GUIDE: https://ttkbootstrap.readthedocs.io/en/latest/styleguide/
 
@@ -92,16 +106,21 @@ my_label.pack(pady=20)
 
 
 # Create Button
-my_button = tb.Button(root, text="yes/no", bootstyle="info", command=yesno)
+my_button = tb.Button(root, text="yes/no", bootstyle="warning outline", command=yesno)
 my_button.pack(side="left", pady=40, padx=10)
 
-my_button = tb.Button(root, text="ok", bootstyle="info", command=ok)
+my_button = tb.Button(root, text="ok", bootstyle="success", command=ok)
 my_button.pack(side="left", pady=40, padx=10)
 
-my_button = tb.Button(root, text="ok/cancel", bootstyle="info", command=okcancel)
+my_button = tb.Button(
+    root, text="ok/cancel", bootstyle="info outline", command=okcancel
+)
 my_button.pack(side="left", pady=40, padx=10)
 
 my_button = tb.Button(root, text="show info", bootstyle="info", command=show_info)
+my_button.pack(side="left", pady=40, padx=10)
+
+my_button = tb.Button(root, text="show error", bootstyle="danger", command=show_error)
 my_button.pack(side="left", pady=40, padx=10)
 
 root.mainloop()
