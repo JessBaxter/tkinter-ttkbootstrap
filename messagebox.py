@@ -47,9 +47,10 @@ def ok():
     messagebox = Messagebox.ok("What do you think?", "Voting time!")
 
     # Set Label to show which button was clicked
-    if messagebox == "None":  # When using Messagebox.yesno
+    if messagebox == "None":  # When using Messagebox.ok
         my_label.config(text=f"You didn't click OK (value = {messagebox})")
     else:
+        # ? messagebox = None, but the else triggers???
         my_label.config(text=f"You clicked OK (value = {messagebox})")
 
 
@@ -60,9 +61,23 @@ def okcancel():
     messagebox = Messagebox.okcancel("Proceed or gtfo?", "Voting time!")
 
     # Set Label to show which button was clicked
-    if messagebox == "Cancel":  # When using Messagebox.yesno
+    if messagebox == "Cancel":  # When using Messagebox.okcancel
         my_label.config(text=f"You clicked CANCEL (value = {messagebox})")
     else:
+        my_label.config(text=f"You clicked OK (value = {messagebox})")
+
+
+# Create show_info function
+# * Shows OK button
+def show_info():
+    # ok
+    messagebox = Messagebox.show_info("Please read.", "Voting time!")
+
+    # Set Label to show which button was clicked
+    if messagebox == "None":  # When using Messagebox.show_info
+        my_label.config(text=f"You didn't click OK (value = {messagebox})")
+    else:
+        # ? messagebox = None, but the else triggers???
         my_label.config(text=f"You clicked OK (value = {messagebox})")
 
 
@@ -84,6 +99,9 @@ my_button = tb.Button(root, text="ok", bootstyle="info", command=ok)
 my_button.pack(side="left", pady=40, padx=10)
 
 my_button = tb.Button(root, text="ok/cancel", bootstyle="info", command=okcancel)
+my_button.pack(side="left", pady=40, padx=10)
+
+my_button = tb.Button(root, text="show info", bootstyle="info", command=show_info)
 my_button.pack(side="left", pady=40, padx=10)
 
 root.mainloop()
